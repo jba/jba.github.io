@@ -1,0 +1,24 @@
+<html>
+  <head>
+    <script type="text/javascript" src="pinyin-quiz.js"></script>
+    <title>Pinyin Quiz</title>
+  </head>
+  <body>
+    Welcome to Pinyin Quiz!<br/>
+    Click "Another" to get another question<br/>
+    Type your answer in the box and hit Enter.<br/>
+    Enter tones with a final 1, 2, 3, or 4. For example, <b>wei3</b>.
+    <p/>
+    Pattern: <input id="pattern" type="text" size=10'/> 
+    (example: "w*1" for all pinyins that start with "w" and end with "1")
+    <p/>
+    <input id="norepeat" type="checkbox">Don't repeat correct answers</input>
+
+    <p/>
+    <div id="questions">
+    </div>
+    <p/>
+    <button onclick='addQuestion()'>Another</button>
+    <br/>
+  </body>
+</html>
