@@ -100,8 +100,7 @@ function checkResponse(response, answer, resultNode) {
 	resultNode.innerHTML += "Yes!";
 	correctResponses.add(response);
     } else { 
-	var last =response[response.length-1];
-	if (!(last=="1" || last=="2" || last=="3" || last=="4")) {
+	if (!hasTone(response)) {
 	    resultNode.innerHTML += "You forgot the tone.";
 	} else {
 	    resultNode.innerHTML += "<b>" + answer + "</b>. ";
@@ -115,6 +114,12 @@ function checkResponse(response, answer, resultNode) {
 	}
     }
 }
+
+function hasTone(s) {
+    var last = s[s.length-1];
+    return (last=="1" || last=="2" || last=="3" || last=="4");
+}
+
 
 function play(audio) {
     audio.onended = null;
@@ -207,7 +212,7 @@ function spacer() { return document.createTextNode(" "); }
         
 function selectPinyins(pattern) {
     var repeat = !document.getElementById("norepeat").checked;
-    var re = pattern.replace(/\*/g, ".*");
+    var re = pattern.trim().replace(/\*/g, ".*");
     var result = [];
     for (var i = 0; i < pinyins.length; i++) {
 	var p = pinyins[i];
@@ -217,4 +222,17 @@ function selectPinyins(pattern) {
     return result;
 }
 
-
+function playFree() {
+    if (event.keyCode == 9 || event.keyCode == 13)  {
+	var p = document.getElementById("free").value.trim();
+	if (!hasTone(p)) {
+	    alert("no tone");
+	    return;
+	}
+	if (!pinyinSet.has(p)) {
+	    alert("not a valid pinyin");
+	    return;
+	}
+	play(audio(p))
+    }
+}
